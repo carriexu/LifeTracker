@@ -1,0 +1,24 @@
+<head>
+  <title>LifeTracker</title>
+</head>
+
+<body>
+  <h1>LifeTracker</h1>
+  {{> userDetails}}
+  {{> history}}
+</body>
+
+<template name="userDetails">
+  <h2>Total: <span>150</span></h2>
+  <h2>Goal: <span>200</span></h2>
+  <h3>Enter Amount: </h3>
+  <input id="amount" type="text"/>
+  <input id="addAmount" type="submit" value="Add"/>
+
+</template>
+
+<template name="history">
+  <h2>Last 5 entries</h2>
+    <p>11/6/2014 3:38am</p>
+
+</template>
