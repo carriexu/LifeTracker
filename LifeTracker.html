@@ -1,9 +1,9 @@
 <head>
-  <title>LifeTracker</title>
+  <title>GoalTracker</title>
 </head>
 
 <body>
-  <h1>LifeTracker</h1>
+  <h1>GoalTracker</h1>
   {{> loginButtons}}
   {{#if currentUser}}
     {{> userDetails}}
@@ -15,9 +15,12 @@
   {{#with user}}
   <h2>Total: <span>{{total}}</span></h2>
   <h2>Goal: <span>{{goal}}</span></h2>
-  <h3>Enter Amount: </h3>
-  <input id="amount" type="text"/>
-  <input id="addAmount" type="submit" value="Add"/>
+  <h3>Enter new entry: </h3>
+  {{/with}}
+  <input id="entry" type="text" value="{{lastEntry}}"/>
+  {{#with user}}
+  <input id="addEntry" type="submit" value="Add Entry"/>
+  <input id="quickSubtract" type="submit" value="-100"/>
   {{/with}}
 
 </template>
