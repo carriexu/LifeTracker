@@ -107,9 +107,9 @@
   <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
     <button class="delete" data-quadid="{{quadId}}">&times;</button>
 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" data-quadid="{{quadId}}"/>
     {{#if isOwner}}
-      <button class="toggle-private">
+      <button class="toggle-private" data-quadid="{{quadId}}">
         {{#if private}}
           Private
         {{else}}

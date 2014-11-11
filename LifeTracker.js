@@ -172,17 +172,17 @@ if (Meteor.isClient) {
   Template.task.events({
 
     "click .toggle-checked": function (event) {
-
-    var quadrants = event.target.id;
-    // Set the checked property to the opposite of its current value
-    Meteor.call("setChecked", this._id, ! this.checked);
+      var quadrants = $(event.target).data('quadid');
+      // Set the checked property to the opposite of its current value
+      Meteor.call("setChecked", this._id, ! this.checked, quadrants);
     },
     "click .delete": function (event) {
       var quadrants = $(event.target).data('quadid');
       Meteor.call("deleteTask", this._id, quadrants);
     },
     "click .toggle-private": function () {
-      Meteor.call("setPrivate", this._id, ! this.private);
+      var quadrants = $(event.target).data('quadid');
+      Meteor.call("setPrivate", this._id, ! this.private, quadrants);
     }
   });
 
@@ -254,8 +254,6 @@ console.log(text, quadrants);
     } else if (quadrants == "4" ){
       task = QuadrantFour.findOne(taskId);
     }
-    console.log(quadrants);
-    console.log(task);
 
     var quadId = task.quadId;
 
@@ -275,22 +273,69 @@ console.log(text, quadrants);
     }
     // Tasks.remove(taskId);
   },
-  setChecked: function (taskId, setChecked) {
-    var task = Tasks.findOne(taskId);
+  setChecked: function (taskId, setChecked, quadrants) {
+    // var task = Tasks.findOne(taskId);
+    var task;
+    if (quadrants == "1" ){
+      task = QuadrantOne.findOne(taskId);
+    } else if (quadrants == "2" ){
+      task = QuadrantTwo.findOne(taskId);
+    } else if (quadrants == "3" ){
+      task = QuadrantThree.findOne(taskId);
+    } else if (quadrants == "4" ){
+      task = QuadrantFour.findOne(taskId);
+    }
+
+    var quadId = task.quadId;
+
     if (task.private && task.owner !== Meteor.userId()) {
       // If the task is private, make sure only the owner can check it off
       throw new Meteor.Error("not-authorized");
     }
-    Tasks.update(taskId, { $set: { checked: setChecked} });
+
+    if (quadrants == "1" ){
+      QuadrantOne.update(taskId, { $set: { checked: setChecked} });
+    } else if (quadrants == "2"){
+      QuadrantTwo.update(taskId, { $set: { checked: setChecked} });
+    } else if (quadrants == "3"){
+      QuadrantThree.update(taskId, { $set: { checked: setChecked} });
+    } else if (quadrants == "4"){
+      QuadrantFour.update(taskId, { $set: { checked: setChecked} });
+    }
+    // Tasks.update(taskId, { $set: { checked: setChecked} });
   },
-  setPrivate: function (taskId, setToPrivate) {
-    var task = Tasks.findOne(taskId);
+  setPrivate: function (taskId, setToPrivate, quadrants) {
+    // var task = Tasks.findOne(taskId);
+
+    var task;
+    if (quadrants == "1" ){
+      task = QuadrantOne.findOne(taskId);
+    } else if (quadrants == "2" ){
+      task = QuadrantTwo.findOne(taskId);
+    } else if (quadrants == "3" ){
+      task = QuadrantThree.findOne(taskId);
+    } else if (quadrants == "4" ){
+      task = QuadrantFour.findOne(taskId);
+    }
+
+    var quadId = task.quadId;
+
     // Make sure only the task owner can make a task private
     if (task.owner !== Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
 
-    Tasks.update(taskId, { $set: { private: setToPrivate } });
+    if (quadrants == "1" ){
+      QuadrantOne.update(taskId, { $set: { private: setToPrivate } });
+    } else if (quadrants == "2"){
+      QuadrantTwo.update(taskId, { $set: { private: setToPrivate } });
+    } else if (quadrants == "3"){
+      QuadrantThree.update(taskId, { $set: { private: setToPrivate } });
+    } else if (quadrants == "4"){
+      QuadrantFour.update(taskId, { $set: { private: setToPrivate } });
+    }
+
+    // Tasks.update(taskId, { $set: { private: setToPrivate } });
   }
 });
 
