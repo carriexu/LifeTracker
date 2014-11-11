@@ -37,10 +37,30 @@
 
 
   <div class="container">
-      {{> quadrant quadTitle="Urgent and Important" quadId="1" }}
-      {{> quadrant quadTitle="Not Urgent and Important" quadId="2" }}
-      {{> quadrant quadTitle="Urgent and Not Important" quadId="3" }}
-      {{> quadrant quadTitle="Not Urgent and Not Important" quadId="4" }}
+
+    <table id="goal-table">
+      <caption>Organize Your Goals Here</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Urgent</th>
+          <th>Not Urgent</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <th>Important</th>
+          <td>{{> quadrant quadTitle="Urgent and Important" quadId="1" }}</td>
+          <td>{{> quadrant quadTitle="Not Urgent and Important" quadId="2" }}</td>
+        </tr>
+        <tr>
+          <th>Not Important</th>
+          <td>{{> quadrant quadTitle="Urgent and Not Important" quadId="3" }}</td>
+          <td>{{> quadrant quadTitle="Not Urgent and Not Important" quadId="4" }}</td>
+        </tr>
+      </tbody>
+    </table>
 
 
 
@@ -55,7 +75,6 @@
           <input type="text" name="text" placeholder="Type to add new tasks" />
         </form>
       {{/if}} -->
-
 
 
   </div>
