@@ -1,118 +1,3 @@
-// GoalData = new Meteor.Collection('goal_data');
-// // GoalData = new Meteor.Collection('goal_data');
-// // GoalData = new Meteor.Collection('goal_data');
-// // GoalData = new Meteor.Collection('goal_data');
-
-// History = new Meteor.Collection('history');
-
-// GoalData.deny({
-//   update: function(userId, data){
-//     if(data.total < 0)
-//       return true;
-//     return false;
-//   }
-// });
-
-// GoalData.allow({
-//   insert: function(userId, data){
-//     if(data.userId == userId)
-//       return true;
-//     return false;
-//   }
-// })
-
-// Meteor.methods({
-//   addGoal: function(entry){
-
-//     // if(!this.isSimulation){
-//     //   var Future = Npm.require('fibers/future');
-//     //   var future = new Future();
-//     //   Meteor.setTimeout(function(){
-//     //     future.return();
-//     //   }, 2 * 1000);
-//     //   future.wait();
-//     // } else {
-//     //   entry = 500;
-//     // }
-
-//     GoalData.update({userId: this.userId }, { $inc: {total: entry} });
-//     History.insert({
-//         value: entry,
-//         date: new Date().toTimeString(),
-//         userId: this.userId
-//       });
-//   }
-// });
-
-// if (Meteor.isClient) {
-//   Meteor.subscribe('allGoalData');
-//   Meteor.subscribe('allHistory');
-
-//   Deps.autorun(function(){
-//     if(Meteor.user())
-//       console.log("User logged in: " + Meteor.user().profile.name);
-//     else
-//       console.log("User logged out!");
-//   });
-
-//   Template.userDetails.helpers({
-//     user: function(){
-//       var data = GoalData.findOne();
-//       if (!data){
-//         data = {
-//           userId: Meteor.userId(),
-//           // total: 0,
-//           // goal: 200
-//         };
-//         GoalData.insert(data);
-//       }
-
-//       return data;
-//     },
-//     lastEntry: function(){ return Session.get('lastEntry');}
-//   });
-
-//   Template.history.helpers({
-//     historyItem: function(){
-//       return History.find({}, {sort: {date: -1}, limit: 5});
-//     }
-//   });
-
-//   Template.userDetails.events({
-//     'click #addEntry': function(e){
-//       e.preventDefault();
-
-//       var entry = parseInt($('#entry').val());
-//       Meteor.call('addGoal', entry, function(error, id){
-//         if(error)
-//           return alert(error.reason);
-//       });
-//       Session.set('lastEntry', entry);
-//     },
-
-//     'click #quickSubtract': function(e){
-//       e.preventDefault();
-//       GoalData.update(this._id, {$inc: {total: -100} });
-//     }
-//   });
-// }
-
-// if (Meteor.isServer) {
-
-//   Meteor.publish('allGoalData', function(){
-//     return GoalData.find({ userId: this.userId });
-//   });
-
-//   Meteor.publish('allHistory', function(){
-//     return History.find({ userId: this.userId }, {sort: {date: -1}});
-//   });
-
-//   Meteor.startup(function () {
-
-//   });
-// }
-
-// simple-todos.js
 QuadrantOne = new Mongo.Collection("quadrantOne");
 QuadrantTwo = new Mongo.Collection("quadrantTwo");
 QuadrantThree = new Mongo.Collection("quadrantThree");
@@ -126,15 +11,7 @@ if (Meteor.isClient) {
 
   // This code only runs on the client
   Template.body.helpers({
-    tasks: function () {
-      if (Session.get("hideCompleted")) {
-        // If hide completed is checked, filter tasks
-        return Tasks.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
-      } else {
-        // Otherwise, return all of the tasks
-        return Tasks.find({}, {sort: {createdAt: -1}});
-      }
-    },
+
     hideCompleted: function () {
       return Session.get("hideCompleted");
     },
@@ -204,24 +81,47 @@ console.log(event.target);
 
   Template.quadrant.helpers({
     getQuadrantOne: function(){
-      console.log(QuadrantOne.find({}, {sort: {createdAt: -1}}));
+      if (Session.get("hideCompleted")) {
+        return QuadrantOne.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+      }
       return QuadrantOne.find({}, {sort: {createdAt: -1}});
     },
 
     getQuadrantTwo: function(){
+      if (Session.get("hideCompleted")) {
+        return QuadrantTwo.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+      }
       return QuadrantTwo.find({}, {sort: {createdAt: -1}});
     },
 
     getQuadrantThree: function(){
+      if (Session.get("hideCompleted")) {
+        return QuadrantThree.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+      }
       return QuadrantThree.find({}, {sort: {createdAt: -1}});
     },
 
     getQuadrantFour: function(){
+      if (Session.get("hideCompleted")) {
+        return QuadrantFour.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+      }
       return QuadrantFour.find({}, {sort: {createdAt: -1}});
     },
 
     isEqual: function(var1, var2) {
       return var1 === var2;
+    },
+
+    incompleteCount: function (quadrants) {
+      if (quadrants == "1"){
+        return QuadrantOne.find({checked: {$ne: true}}).count();
+      } else if (quadrants == "2") {
+        return QuadrantTwo.find({checked: {$ne: true}}).count();
+      } else if (quadrants == "3") {
+        return QuadrantThree.find({checked: {$ne: true}}).count();
+      } else if (quadrants == "4") {
+        return QuadrantFour.find({checked: {$ne: true}}).count();
+      }
     }
   });
 
