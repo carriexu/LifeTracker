@@ -150,11 +150,12 @@ if (Meteor.isClient) {
   });
 
   Template.body.events({
-    "submit form": function (event) {
+    "submit .new-task": function (event) {
     // This function is called when the new task form is submitted
 
     var text = event.target.text.value;
     var quadrants = event.target.id;
+console.log(event.target);
 
     Meteor.call("addTask", text, quadrants);
 
@@ -169,21 +170,36 @@ if (Meteor.isClient) {
     Session.set("hideCompleted", event.target.checked);
   }
 });
+
   Template.task.events({
 
     "click .toggle-checked": function (event) {
+      event.preventDefault();
       var quadrants = $(event.target).data('quadid');
       // Set the checked property to the opposite of its current value
       Meteor.call("setChecked", this._id, ! this.checked, quadrants);
     },
+
     "click .delete": function (event) {
+      console.log("delete");
+      event.preventDefault();
       var quadrants = $(event.target).data('quadid');
       Meteor.call("deleteTask", this._id, quadrants);
     },
-    "click .toggle-private": function () {
+    "click .toggle-private": function (event) {
+      event.preventDefault();
       var quadrants = $(event.target).data('quadid');
       Meteor.call("setPrivate", this._id, ! this.private, quadrants);
+    },
+    "submit .edit-form": function (event) {
+console.log('edit form');
+      event.preventDefault();
+      var quadrants = $(event.target).data('quadid');
+console.log(event.target);
+      var newText = event.target.text.value;
+      Meteor.call("editTask", this._id, newText, quadrants);
     }
+
   });
 
   Template.quadrant.helpers({
@@ -319,7 +335,6 @@ console.log(text, quadrants);
     }
 
     var quadId = task.quadId;
-
     // Make sure only the task owner can make a task private
     if (task.owner !== Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
@@ -334,9 +349,38 @@ console.log(text, quadrants);
     } else if (quadrants == "4"){
       QuadrantFour.update(taskId, { $set: { private: setToPrivate } });
     }
-
     // Tasks.update(taskId, { $set: { private: setToPrivate } });
+  },
+
+  editTask: function (taskId, newText, quadrants) {
+console.log(taskId, quadrants);
+    var task;
+    if (quadrants == "1"){
+      task = QuadrantOne.findOne(taskId);
+    } else if (quadrants == "2"){
+      task = QuadrantTwo.findOne(taskId);
+    } else if (quadrants == "3"){
+      task = QuadrantThree.findOne(taskId);
+    } else if (quadrants == "4"){
+      task = QuadrantFour.findOne(taskI);
+    }
+console.log(task);
+    var quadId = task.quadId;
+    if (task.owner !== Meteor.userId()){
+      throw new Metor.Error("not-authorized");
+    }
+
+    if (quadrants == "1"){
+      QuadrantOne.update(taskId, { $set: { text: newText }});
+    } else if (quadrants == "2") {
+      QuadrantTwo.update(taskId, { $set: { text: newText }});
+    } else if (quadrants == "3") {
+      QuadrantThree.update(taskId, { $set: { text: newText }});
+    } else if (quadrants == "4") {
+      QuadrantFour.update(taskId, { $set: { text: newText }});
+    }
   }
+
 });
 
 if (Meteor.isServer) {

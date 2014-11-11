@@ -74,32 +74,31 @@
             <input type="text" name="text" placeholder="Type to add new tasks" />
           </form>
         {{/if}}
+          <ul>
+            {{#if isEqual quadId "1"}}
+              {{#each getQuadrantOne}}
+                {{> task }}
+              {{/each}}
+            {{/if}}
 
-        <ul>
-          {{#if isEqual quadId "1"}}
-            {{#each getQuadrantOne}}
-              {{> task }}
-            {{/each}}
-          {{/if}}
+            {{#if isEqual quadId "2"}}
+              {{#each getQuadrantTwo}}
+                {{> task }}
+              {{/each}}
+            {{/if}}
 
-          {{#if isEqual quadId "2"}}
-            {{#each getQuadrantTwo}}
-              {{> task }}
-            {{/each}}
-          {{/if}}
+            {{#if isEqual quadId "3"}}
+              {{#each getQuadrantThree}}
+                {{> task }}
+              {{/each}}
+            {{/if}}
 
-          {{#if isEqual quadId "3"}}
-            {{#each getQuadrantThree}}
-              {{> task }}
-            {{/each}}
-          {{/if}}
-
-          {{#if isEqual quadId "4"}}
-            {{#each getQuadrantFour}}
-              {{> task }}
-            {{/each}}
-          {{/if}}
-        </ul>
+            {{#if isEqual quadId "4"}}
+              {{#each getQuadrantFour}}
+                {{> task }}
+              {{/each}}
+            {{/if}}
+          </ul>
   </div>
 </template>
 
@@ -117,6 +116,8 @@
         {{/if}}
       </button>
     {{/if}}
-    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+    <form id="edit{{_id}}" class="edit-form" data-quadid="{{quadId}}">
+      <input type="text" name="text" value="{{text}}" />
+    </form>
   </li>
 </template>

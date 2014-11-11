@@ -1,1 +1,4 @@
 /* CSS declarations go here */
+form.edit-form {
+  display: inline;
+}
