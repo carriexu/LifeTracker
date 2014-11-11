@@ -5,30 +5,118 @@
 <body>
   <h1>GoalTracker</h1>
   {{> loginButtons}}
-  {{#if currentUser}}
+<!--   {{#if currentUser}}
     {{> userDetails}}
     {{> history}}
-  {{/if}}
-</body>
+  {{/if}} -->
 
+
+
+<!--
 <template name="userDetails">
   {{#with user}}
   <h2>Total: <span>{{total}}</span></h2>
   <h2>Goal: <span>{{goal}}</span></h2>
-  <h3>Enter new entry: </h3>
+  <h3>New Goal: </h3>
   {{/with}}
   <input id="entry" type="text" value="{{lastEntry}}"/>
   {{#with user}}
-  <input id="addEntry" type="submit" value="Add Entry"/>
+  <input id="addEntry" type="submit" value="Add Goal"/>
   <input id="quickSubtract" type="submit" value="-100"/>
   {{/with}}
-
 </template>
 
-<template name="history">
-  <h2>Last 5 entries</h2>
-  {{#each historyItem}}
-    <p>{{date}} - {{value}}</p>
-  {{/each}}
 
+<template name="history">
+  <h2>My Goals History</h2>
+  {{#each historyItem}}
+    <p>{{date}}</p>
+    <p>{{value}}</p>
+  {{/each}}
+</template> -->
+
+
+  <div class="container">
+      {{> quadrant quadTitle="Urgent and Important" quadId="1" }}
+      {{> quadrant quadTitle="Not Urgent and Important" quadId="2" }}
+      {{> quadrant quadTitle="Urgent and Not Important" quadId="3" }}
+      {{> quadrant quadTitle="Not Urgent and Not Important" quadId="4" }}
+
+
+
+      <!-- <h2>Urgent and Important Goals({{incompleteCount}})</h2>
+      <label class="hide-completed">
+        <input type="checkbox" checked="{{hideCompleted}}" />
+        Hide Completed Goals
+      </label>
+
+      {{#if currentUser}}
+        <form class="new-task">
+          <input type="text" name="text" placeholder="Type to add new tasks" />
+        </form>
+      {{/if}} -->
+
+
+
+  </div>
+</body>
+
+<template name="quadrant">
+  <div>
+    <h2>{{quadTitle}}({{incompleteCount}})</h2>
+        <label class="hide-completed">
+          <input type="checkbox" checked="{{hideCompleted}}" />
+          Hide Completed Goals
+        </label>
+
+        {{#if currentUser}}
+          <form class="new-task" id="{{quadId}}">
+            <input type="text" name="text" placeholder="Type to add new tasks" />
+          </form>
+        {{/if}}
+
+        <ul>
+          {{#if isEqual quadId "1"}}
+            {{#each getQuadrantOne}}
+              {{> task }}
+            {{/each}}
+          {{/if}}
+
+          {{#if isEqual quadId "2"}}
+            {{#each getQuadrantTwo}}
+              {{> task }}
+            {{/each}}
+          {{/if}}
+
+          {{#if isEqual quadId "3"}}
+            {{#each getQuadrantThree}}
+              {{> task }}
+            {{/each}}
+          {{/if}}
+
+          {{#if isEqual quadId "4"}}
+            {{#each getQuadrantFour}}
+              {{> task }}
+            {{/each}}
+          {{/if}}
+        </ul>
+  </div>
+</template>
+
+<template name="task">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <button class="delete" data-quadid="{{quadId}}">&times;</button>
+
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+    {{#if isOwner}}
+      <button class="toggle-private">
+        {{#if private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </button>
+    {{/if}}
+    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+  </li>
 </template>
