@@ -5,8 +5,23 @@
     <title>GoalTracker</title>
   </head>
   <body>
-    <h1>GoalTracker</h1>
-    {{> loginButtons}}
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">GoalTracker</a></h1>
+        </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li><a href="#">{{> loginButtons}}</a></li>
+        </ul>
+      </section>
+    </nav>
+
   <!--   {{#if currentUser}}
       {{> userDetails}}
       {{> history}}
@@ -64,7 +79,8 @@
 
   <template name="quadrant">
     <div>
-      <h2>{{quadTitle}}({{incompleteCount quadId}})</h2>
+      <h2>{{quadTitle}}</h2>
+      <p>incomplete goals: {{incompleteCount quadId}}</p>
           <label class="hide-completed">
             <input type="checkbox" checked="{{hideCompleted}}" />
             Hide Completed Goals
