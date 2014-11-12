@@ -1,5 +1,7 @@
 {
   "packages": {
-    "foundation": {}
+    "foundation": {},
+    "foundation-icons-gen-enclosed": {},
+    "foundation-icons-general": {}
   }
 }

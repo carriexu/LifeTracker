@@ -122,7 +122,39 @@
 
   <template name="task">
     <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
-      <div class="list-items">
+      <ul class="button-group">
+        <li><button class="delete tiny button" data-quadid="{{quadId}}">&times;</button></li>
+        <li><input type="checkbox" checked="{{checked}}" class="toggle-checked" data-quadid="{{quadId}}"/></li>
+        <li>
+          {{#if isOwner}}
+          <button class="toggle-private tiny button" data-quadid="{{quadId}}">
+          {{#if private}}
+           Make Public
+          {{else}}
+           Make Private
+          {{/if}}
+        </button>
+      {{/if}}
+        </li>
+      </ul>
+<!--       <button class="delete tiny button" data-quadid="{{quadId}}">&times;</button>
+      <input type="checkbox" checked="{{checked}}" class="toggle-checked" data-quadid="{{quadId}}"/>
+      {{#if isOwner}}
+        <button class="toggle-private tiny button" data-quadid="{{quadId}}">
+          {{#if private}}
+           Public
+          {{else}}
+            Private
+          {{/if}}
+        </button>
+      {{/if}} -->
+
+      <form id="edit{{_id}}" class="edit-form" data-quadid="{{quadId}}">
+        <input type="text" name="text" value="{{text}}" />
+      </form>
+
+<!--       <div class="list-items">
+        <i class="gen-enclosed foundicon-remove" data-quadid="{{quadId}}"></i>
         <button class="delete tiny button" data-quadid="{{quadId}}">&times;</button>
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" data-quadid="{{quadId}}"/>
       {{#if isOwner}}
@@ -137,7 +169,7 @@
         <form id="edit{{_id}}" class="edit-form" data-quadid="{{quadId}}">
           <input type="text" name="text" value="{{text}}" />
         </form>
-      </div>
+      </div> -->
     </li>
   </template>
 

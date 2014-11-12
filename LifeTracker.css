@@ -29,8 +29,8 @@ li.quadrants {
 ul {
   list-style-type: none;
 }
-/*
-edit-form input[type="text"] {
+
+/*edit-form input[type="text"] {
   background: transparent;
   cursor: pointer;
 }
@@ -52,5 +52,5 @@ input[type="text"] {
   flex: 1;
   background: transparent;
   cursor: pointer;
-}
-*/
+}*/
+
