@@ -220,37 +220,37 @@ console.log(text, quadrants);
     }
     // Tasks.update(taskId, { $set: { checked: setChecked} });
   },
-  // setPrivate: function (taskId, setToPrivate, quadrants) {
-  //   // var task = Tasks.findOne(taskId);
+  setPrivate: function (taskId, setToPrivate, quadrants) {
+    // var task = Tasks.findOne(taskId);
 
-  //   var task;
-  //   if (quadrants == "1" ){
-  //     task = QuadrantOne.findOne(taskId);
-  //   } else if (quadrants == "2" ){
-  //     task = QuadrantTwo.findOne(taskId);
-  //   } else if (quadrants == "3" ){
-  //     task = QuadrantThree.findOne(taskId);
-  //   } else if (quadrants == "4" ){
-  //     task = QuadrantFour.findOne(taskId);
-  //   }
+    var task;
+    if (quadrants == "1" ){
+      task = QuadrantOne.findOne(taskId);
+    } else if (quadrants == "2" ){
+      task = QuadrantTwo.findOne(taskId);
+    } else if (quadrants == "3" ){
+      task = QuadrantThree.findOne(taskId);
+    } else if (quadrants == "4" ){
+      task = QuadrantFour.findOne(taskId);
+    }
 
-  //   var quadId = task.quadId;
-  //   // Make sure only the task owner can make a task private
-  //   if (task.owner !== Meteor.userId()) {
-  //     throw new Meteor.Error("not-authorized");
-  //   }
+    var quadId = task.quadId;
+    // Make sure only the task owner can make a task private
+    if (task.owner !== Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
 
-  //   if (quadrants == "1" ){
-  //     QuadrantOne.update(taskId, { $set: { private: setToPrivate } });
-  //   } else if (quadrants == "2"){
-  //     QuadrantTwo.update(taskId, { $set: { private: setToPrivate } });
-  //   } else if (quadrants == "3"){
-  //     QuadrantThree.update(taskId, { $set: { private: setToPrivate } });
-  //   } else if (quadrants == "4"){
-  //     QuadrantFour.update(taskId, { $set: { private: setToPrivate } });
-  //   }
-  //   // Tasks.update(taskId, { $set: { private: setToPrivate } });
-  // },
+    if (quadrants == "1" ){
+      QuadrantOne.update(taskId, { $set: { private: setToPrivate } });
+    } else if (quadrants == "2"){
+      QuadrantTwo.update(taskId, { $set: { private: setToPrivate } });
+    } else if (quadrants == "3"){
+      QuadrantThree.update(taskId, { $set: { private: setToPrivate } });
+    } else if (quadrants == "4"){
+      QuadrantFour.update(taskId, { $set: { private: setToPrivate } });
+    }
+    // Tasks.update(taskId, { $set: { private: setToPrivate } });
+  },
 
   editTask: function (taskId, newText, quadrants) {
 console.log(taskId, quadrants);
