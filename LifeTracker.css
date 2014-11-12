@@ -1,10 +1,26 @@
 /* CSS declarations go here */
 html, body {
-  background: url("http://www.icanbecreative.com/res/freeweb/2011/04/bookmark.png") no-repeat center center fixed;
+  background: url("http://media02.hongkiat.com/minimalist-wallpapers/Calmness_by_Akmal_Ibn_Marmoh.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+a.goal-home {
+  font-family: 'Merriweather', serif;
+  font-size: 2em;
+}
+
+h3.quad-title{
+  font-family: 'Abril Fatface', cursive;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.login-display-name {
+  font-family: 'Merriweather', serif;
+  font-size: 1.25em;
 }
 
 form.edit-form {
@@ -17,9 +33,9 @@ form.edit-form {
 }
 
 li.quadrants {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.6);
   border: solid 0.2em lightgray;
-  border-radius: 0.5em;
+  border-radius: 0.25em;
   height: 310px;
   overflow:hidden;
   overflow-y:scroll;
