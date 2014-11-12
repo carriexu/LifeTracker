@@ -56,6 +56,7 @@
     <div class="row">
       <div class="large-12 columns">
         <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-2">
+
           <li class="quadrants">{{> quadrant quadTitle="Urgent and Important" quadId="1" }}</li>
           <li class="quadrants">{{> quadrant quadTitle="Not Urgent and Important" quadId="2" }}</li>
           <li class="quadrants">{{> quadrant quadTitle="Urgent and Not Important" quadId="3" }}</li>
@@ -122,10 +123,10 @@
   <template name="task">
     <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
       <div class="list-items">
-        <button class="delete" data-quadid="{{quadId}}">&times;</button>
+        <button class="delete tiny button" data-quadid="{{quadId}}">&times;</button>
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" data-quadid="{{quadId}}"/>
       {{#if isOwner}}
-        <button class="toggle-private" data-quadid="{{quadId}}">
+        <button class="toggle-private tiny button" data-quadid="{{quadId}}">
           {{#if private}}
             Make Public
           {{else}}

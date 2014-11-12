@@ -13,15 +13,17 @@ form.edit-form {
 
 .columns {
   empty-cells: show;
+  padding-top: 10px;
 }
 
 li.quadrants {
   background: rgba(255, 255, 255, 0.8);
   border: solid 0.2em lightgray;
   border-radius: 0.5em;
-  height: 300px;
+  height: 310px;
   overflow:hidden;
   overflow-y:scroll;
+  padding: 15px;
 }
 
 ul {
