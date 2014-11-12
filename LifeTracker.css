@@ -1,9 +1,51 @@
 /* CSS declarations go here */
+html, body {
+  background: url("http://www.icanbecreative.com/res/freeweb/2011/04/bookmark.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 form.edit-form {
   display: inline;
 }
 
-#goal-table {
-  border: 1px solid black;
+.columns {
   empty-cells: show;
 }
+
+.quadrants {
+  background: rgba(255, 255, 255, 0.8);
+  border: solid 0.2em white;
+  border-radius: 2em;
+  height: 200px;
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+/*
+edit-form input[type="text"] {
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  font-size: 14px;
+  font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: .75rem 0;
+  line-height: 1.5rem !important;
+  border: none;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: #333333;
+  outline: none;
+}
+
+.list-items .list-item input[type="text"] {
+  -webkit-box-flex: 1;
+  flex: 1;
+  background: transparent;
+  cursor: pointer;
+}
+*/
