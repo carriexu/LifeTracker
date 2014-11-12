@@ -108,7 +108,7 @@
       <div class="list-items">
         <button class="delete" data-quadid="{{quadId}}">&times;</button>
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" data-quadid="{{quadId}}"/>
-<!--       {{#if isOwner}}
+      {{#if isOwner}}
         <button class="toggle-private" data-quadid="{{quadId}}">
           {{#if private}}
             Make Public
@@ -116,7 +116,7 @@
             Make Private
           {{/if}}
         </button>
-      {{/if}} -->
+      {{/if}}
         <form id="edit{{_id}}" class="edit-form" data-quadid="{{quadId}}">
           <input type="text" name="text" value="{{text}}" />
         </form>
