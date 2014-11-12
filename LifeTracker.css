@@ -27,6 +27,17 @@ form.edit-form {
   display: inline;
 }
 
+p.incomplete-count{
+  text-align: center;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 1em;
+}
+
+label.hide-completed{
+  text-align: center;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 1em;
+}
 .columns {
   empty-cells: show;
   padding-top: 10px;
